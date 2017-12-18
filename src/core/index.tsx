@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import * as sub from 'sub';
+export { Plugin } from './plugin';
 
 export {
   React,
@@ -11,8 +11,9 @@ export {
 const script = document.createElement('script');
 script.src = './dist/sub/index.js';
 script.onload = function() {
-  console.log('loaded', (window as any).api.sub);
-  const App: React.ComponentType = (window as any).api.sub.App;
+  console.log('loaded api.sub', (window as any).api.sub);
+  const plugin = new (window as any).api.sub.default;
+  const App: React.ComponentType = plugin.main;
   ReactDOM.render(<App />, document.getElementById('app'));
 }
 document.body.appendChild(script);

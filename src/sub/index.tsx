@@ -1,7 +1,7 @@
 import * as React from "react";
+import { Plugin } from "core";
+import { App } from "./app";
 
-export class App extends React.PureComponent {
-  public render(): JSX.Element {
-    return <div>Hello world!</div>;
-  }
+export default class AppPlugin implements Plugin {
+  public main: React.ComponentType = App;
 }

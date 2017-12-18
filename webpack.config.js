@@ -21,7 +21,7 @@ const coreExternals = {
   }
 };
 
-function createAppConfig(name) {
+function createAppConfig(name, externals = {}) {
   return {
     entry: {
       [name]: `./src/${name}/index.tsx`
@@ -35,6 +35,7 @@ function createAppConfig(name) {
     resolve: {
       extensions: [".tsx", ".ts", ".js"]
     },
+    externals,
     module: {
       rules: [
         {
@@ -47,13 +48,8 @@ function createAppConfig(name) {
 }
 
 const apps = {
-  core: {
-    ...createAppConfig("core")
-  },
-  sub: {
-    ...createAppConfig("sub"),
-    externals: coreExternals
-  }
+  core: createAppConfig("core"),
+  sub: createAppConfig("sub", coreExternals)
 };
 
 module.exports = function(env) {
