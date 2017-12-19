@@ -24,7 +24,7 @@ const coreExternals = {
 function createAppConfig(name, externals = {}) {
   return {
     entry: {
-      [name]: `./src/${name}/index.tsx`
+      [name]: `./src/${name}`
     },
     output: {
       path: path.resolve(`./dist/${name}`),

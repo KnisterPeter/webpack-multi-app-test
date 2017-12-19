@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "prestart": "rimraf dist",
-    "start": "npm run build:core && npm run build:other",
-    "build:core": "webpack --env.app core",
-    "watch:core": "npm run build:core -- --watch",
-    "build:other": "webpack --env.but-app core",
-    "watch:other": "npm run build:other -- --watch",
+    "start": "npm run build",
+    "build": "node webpack",
+    "watch": "npm run build -- --watch",
     "serve": "serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
