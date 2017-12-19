@@ -6,6 +6,13 @@
     "declaration": true,
     "strict": true,
     "moduleResolution": "node",
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "*",
+        "dist/*"
+      ]
+    }
   }
 }
