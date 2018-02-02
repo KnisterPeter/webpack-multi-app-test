@@ -6,15 +6,21 @@ const config = require("./webpack.config");
 
 const watchMode = process.argv.find(arg => arg === "--watch") !== undefined;
 
-const apps = fs.readdirSync("./src");
-const configs = apps.reduce((configs, app) => {
-  configs[app] = config({ app });
-  configs[app].plugins = [
-    ...(configs[app].plugins || []),
-    new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/])
-  ];
+const appFolders = fs
+  .readdirSync("./src")
+  .filter(app => fs.existsSync(`./src/${app}/package.json`));
+const configs = appFolders.reduce((configs, app) => {
+  const appConfig = config({ app });
+  if (appConfig) {
+    appConfig.plugins = [
+      ...(appConfig.plugins || []),
+      new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/])
+    ];
+    configs[app] = appConfig;
+  }
   return configs;
 }, {});
+const apps = Object.keys(configs);
 
 const pkgs = apps.reduce((pkgs, app) => {
   const getEntryDirectory = entry =>
