@@ -23,6 +23,7 @@ const coreExternals = {
 
 function createAppConfig(name, externals = {}) {
   return {
+    devtool: 'sourcemap',
     entry: {
       [name]: `./src/${name}`
     },
@@ -40,10 +41,13 @@ function createAppConfig(name, externals = {}) {
       rules: [
         {
           test: /\.tsx?$/,
-          use: "ts-loader"
+          use: {
+            loader: 'ts-loader'
+          }
         }
       ]
-    }
+    },
+    devtool: "source-map"
   };
 }
 
